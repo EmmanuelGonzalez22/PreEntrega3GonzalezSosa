@@ -22,20 +22,30 @@ function bienvenida() {
 }
 const restaStock = function (num1, num2) {
   /* descuenta la cantidad de producto que solicita el cliente */
-  if (num1 <= num2 && num1 >= 0) {
+  if (num1 <= num2 && num1 > 0) {
     num2 = num2 - num1;
-    return num2;
+  } else if (num1 <= 0) {
+    alert("Cantidad no válida");
   } else {
     alert("No disponemos de stock. Stock disponible: " + num2);
-    return num2;
   }
+  return num2;
+};
+
+const calculaPrecio = function (num1, num2, num3) {
+  if (num1 <= num3 && num1 >= 0) {
+    precioFinal += num1 * num2;
+  } else {
+    precioFinal += 0;
+  }
+  return precioFinal;
 };
 
 /* LOGICA */
 
 let opcion = bienvenida();
 
-while (opcion != 0) {
+while (opcion != "0") {
   if (opcion == "1") {
     let stock = prompt(
       "Producto 1: " +
@@ -64,39 +74,55 @@ while (opcion != 0) {
         precioProducto4 +
         "\n\n presiona 0 para finalizar compra"
     );
-    while (pedido != 0) {
+    while (pedido != "0") {
       let cantidadCompra;
       switch (pedido) {
         case "1":
           cantidadCompra = parseInt(
             prompt("Cuantos desea comprar? Stock disponible: " + producto1)
           );
+          precioFinal = calculaPrecio(
+            cantidadCompra,
+            precioProducto1,
+            producto1
+          );
           producto1 = restaStock(cantidadCompra, producto1);
-          precioFinal += cantidadCompra * precioProducto1;
           break;
         case "2":
           cantidadCompra = parseInt(
             prompt("Cuantos desea comprar? Stock disponible: " + producto2)
           );
+          precioFinal = calculaPrecio(
+            cantidadCompra,
+            precioProducto2,
+            producto2
+          );
           producto2 = restaStock(cantidadCompra, producto2);
-          precioFinal += cantidadCompra * precioProducto2;
           break;
         case "3":
           cantidadCompra = parseInt(
             prompt("Cuantos desea comprar? Stock disponible: " + producto3)
           );
+          precioFinal = calculaPrecio(
+            cantidadCompra,
+            precioProducto3,
+            producto3
+          );
           producto3 = restaStock(cantidadCompra, producto3);
-          precioFinal += cantidadCompra * precioProducto3;
           break;
         case "4":
           cantidadCompra = parseInt(
             prompt("Cuantos desea comprar? Stock disponible: " + producto4)
           );
+          precioFinal = calculaPrecio(
+            cantidadCompra,
+            precioProducto4,
+            producto4
+          );
           producto4 = restaStock(cantidadCompra, producto4);
-          precioFinal += cantidadCompra * precioProducto4;
           break;
         default:
-          alert("opcion no valida");
+          alert("Opción no válida");
           break;
       }
       pedido = prompt(
@@ -110,12 +136,12 @@ while (opcion != 0) {
           precioProducto4 +
           "\n\nTOTAL= $" +
           precioFinal +
-          "\n\n presiona 0 para finalizar compra"
+          "\n\n Presiona 0 para finalizar compra"
       );
     }
     alert("Valor total de su compra: $" + precioFinal);
   } else {
-    alert("opcion no valida");
+    alert("Opción no válida");
   }
 
   opcion = bienvenida();
