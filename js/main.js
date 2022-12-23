@@ -110,7 +110,7 @@ function bienvenida() {
   );
 }
 
-/* descuenta la cantidad de producto que solicita el cliente */
+/* descuenta la cantidad que solicita el cliente del stock del producto */
 const restaStock = function (cantCompra, productoStock) {
   if (cantCompra <= productoStock && cantCompra > 0) {
     productoStock = productoStock - cantCompra;
@@ -194,23 +194,7 @@ while (opcion != "0") {
     );
   } else if (opcion == "2") {
     let pedido = prompt(
-      "Selecciona el numero de producto que desea comprar: \n 1- " +
-        premiumPerroAduGr.nombre +
-        " --> precio por unidad $" +
-        premiumPerroAduGr.precio +
-        "\n 2- " +
-        premiumPerroAduCh.nombre +
-        " --> precio por unidad $" +
-        premiumPerroAduCh.precio +
-        "\n 3- " +
-        premiumGatoAduGr.nombre +
-        " --> precio por unidad $" +
-        premiumGatoAduGr.precio +
-        "\n 4- " +
-        premiumGatoAduCh.nombre +
-        " --> precio por unidad $" +
-        premiumGatoAduCh.precio +
-        "\n\n presiona 0 para finalizar compra"
+      `Selecciona el numero de producto que desea comprar:\n1- ${premiumPerroAduGr.nombre} --> precio por unidad $ ${premiumPerroAduGr.precio}\n2- ${premiumPerroAduCh.nombre} --> precio por unidad $ ${premiumPerroAduCh.precio}\n3- ${premiumGatoAduGr.nombre} --> precio por unidad $ ${premiumGatoAduGr.precio}\n4- ${premiumGatoAduCh.nombre} --> precio por unidad $ ${premiumGatoAduCh.precio}\n\nPresiona 0 para finalizar compra`
     );
     while (pedido != "0") {
       let cantidadCompra;
@@ -313,25 +297,7 @@ while (opcion != "0") {
       }
 
       pedido = prompt(
-        "Selecciona el numero de producto que desea comprar: \n 1- " +
-          premiumPerroAduGr.nombre +
-          " --> precio por unidad $" +
-          premiumPerroAduGr.precio +
-          "\n 2- " +
-          premiumPerroAduCh.nombre +
-          " --> precio por unidad $" +
-          premiumPerroAduCh.precio +
-          "\n 3- " +
-          premiumGatoAduGr.nombre +
-          " --> precio por unidad $" +
-          premiumGatoAduGr.precio +
-          "\n 4- " +
-          premiumGatoAduCh.nombre +
-          " --> precio por unidad $" +
-          premiumGatoAduCh.precio +
-          "\n\nTOTAL= $" +
-          precioFinal +
-          "\n\n Presiona 0 para finalizar compra"
+        `Selecciona el numero de producto que desea comprar:\n1- ${premiumPerroAduGr.nombre} --> precio por unidad $ ${premiumPerroAduGr.precio}\n2- ${premiumPerroAduCh.nombre} --> precio por unidad $ ${premiumPerroAduCh.precio}\n3- ${premiumGatoAduGr.nombre} --> precio por unidad $ ${premiumGatoAduGr.precio}\n4- ${premiumGatoAduCh.nombre} --> precio por unidad $ ${premiumGatoAduCh.precio}\n\n${carrito}\n\nTOTAL= $ ${precioFinal}\n\nPresiona 0 para finalizar compra`
       );
     }
     if (carrito != 0) {
