@@ -23,7 +23,7 @@ function Producto(nombre, mascota, precio, stock, peso, edad) {
 }
 
 const premiumPerroAduGr = new Producto(
-  "Premium Perro Adulto x 20kg",
+  "Premium perro Adulto x 20kg",
   "perro",
   7000,
   20,
@@ -31,7 +31,7 @@ const premiumPerroAduGr = new Producto(
   "adulto"
 );
 const premiumPerroCachGr = new Producto(
-  "Premium Perro Cachorro x 20kg",
+  "Premium perro Cachorro x 20kg",
   "perro",
   7500,
   15,
@@ -39,7 +39,7 @@ const premiumPerroCachGr = new Producto(
   "cachorro"
 );
 const premiumPerroAduCh = new Producto(
-  "Premium Perro Adulto x 8kg",
+  "Premium perro Adulto x 8kg",
   "perro",
   3800,
   23,
@@ -47,7 +47,7 @@ const premiumPerroAduCh = new Producto(
   "adulto"
 );
 const premiumPerroCachCh = new Producto(
-  "Premium Perro Cachorro x 8kg",
+  "Premium perro Cachorro x 8kg",
   "perro",
   4000,
   21,
@@ -55,7 +55,7 @@ const premiumPerroCachCh = new Producto(
   "cachorro"
 );
 const premiumGatoAduGr = new Producto(
-  "Premium Gato adulto x 20kg",
+  "Premium gato adulto x 20kg",
   "gato",
   6200,
   18,
@@ -63,7 +63,7 @@ const premiumGatoAduGr = new Producto(
   "adulto"
 );
 const premiumGatoCachGr = new Producto(
-  "Premium Gato cachorro x 20kg",
+  "Premium gato cachorro x 20kg",
   "gato",
   6500,
   26,
@@ -71,7 +71,7 @@ const premiumGatoCachGr = new Producto(
   "adulto"
 );
 const premiumGatoAduCh = new Producto(
-  "Premium Gato adulto x 8kg",
+  "Premium gato adulto x 8kg",
   "gato",
   7000,
   22,
@@ -79,7 +79,7 @@ const premiumGatoAduCh = new Producto(
   "cachorro"
 );
 const premiumGatoCachCh = new Producto(
-  "Premium Gato cachorro x 8kg",
+  "Premium gato cachorro x 8kg",
   "gato",
   7000,
   15,
@@ -105,7 +105,7 @@ let precioFinal = 0;
 function bienvenida() {
   return parseInt(
     prompt(
-      "<----------> Bienvenido a Pet´s BRC Online <----------> \n\nSeleccione una opción: \n1- Consultar stock \n2- Realizar pedido \n3- Filtrar busqueda por precio \n0- Salir"
+      "<----------> Bienvenido a Pet´s BRC Online <----------> \n\nSeleccione una opción: \n1- Consultar stock \n2- Realizar pedido \n3- Filtrar busqueda por precio \n4- Filtrar busqueda por nombre \n0- Salir"
     )
   );
 }
@@ -147,14 +147,22 @@ function filtrarPrecio(arr, filtro) {
   return encontrado;
 }
 
+// filtra por nombre
+function filtrarNombre(arr, filtro) {
+  const encontrado = arr.filter((producto) => {
+    return producto.nombre.includes(filtro);
+  });
+  return encontrado;
+}
+
 //termina la compra
 function pagar() {
   if (carrito != "") {
     let nombreTarjeta = prompt(
-      "Ingrese nombre como figura en su tarjeta de credito: \n\nIngrese 0 para cancelar"
+      "Ingrese nombre como figura en su tarjeta de credito: "
     );
     let cvvTarjeta = prompt(
-      "Ingrese el cvv como figura en su tarjeta de credito: \n\nIngrese 0 para cancelar"
+      "Ingrese el cvv como figura en su tarjeta de credito: "
     );
     alert("Gracias por su compra.");
     carrito.splice(0, carrito.length);
@@ -311,8 +319,11 @@ while (opcion != "0") {
   } else if (opcion == "3") {
     const entradaFiltro = parseFloat(prompt("Ingrese monto maximo a pagar: "));
     const filtrado = filtrarPrecio(listado, entradaFiltro);
-    alert(filtrado);
     console.log(filtrado);
+  } else if (opcion == "4") {
+    const entradaFiltroNom = prompt("Ingrese nombre de producto que busca: ");
+    const filtradoNom = filtrarNombre(listado, entradaFiltroNom);
+    console.log(filtradoNom);
   } else {
     alert("Opción no válida");
   }
