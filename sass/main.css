@@ -1,1 +1,132 @@
-/*# sourceMappingURL=main.css.map */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body header {
+  width: 100%;
+}
+body header nav {
+  background-color: #f1c40f;
+  padding: 10px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body header nav a {
+  width: 150px;
+  height: auto;
+}
+body header nav a img {
+  width: 100%;
+  height: auto;
+}
+body header nav div {
+  width: 100px;
+  height: auto;
+}
+body header nav div span {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+body header nav div span i {
+  font-size: 3vw;
+}
+body header h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background: rgb(202, 199, 199);
+  margin: 0;
+}
+body main .container__principal {
+  display: flex;
+}
+body main .container__principal aside {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1;
+  top: 230px;
+  width: 10%;
+  background-color: rgba(241, 196, 15, 0.5764705882);
+}
+body main .container__principal aside form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+body main .container__principal aside form div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15%;
+}
+body main .container__principal section.gridProductos {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+body main .container__principal section.gridProductos .tarjeta {
+  width: 18rem;
+}
+body main .container__principal section.gridProductos .tarjeta .container_img {
+  width: 90%;
+  height: 370px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body main .container__principal section.gridProductos .tarjeta .container_img img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 100%;
+  padding: 20px 0;
+}
+body main .container__principal section.gridProductos .tarjeta p {
+  font-size: 20px;
+  font-weight: bold;
+}
+body main .container__tabla {
+  width: 90%;
+  margin-top: 50px;
+  margin-left: auto;
+  padding-right: 100px;
+}
+body main .container__tabla table {
+  width: 100%;
+}
+body main .container__tabla table tr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+body main .container__tabla table tr img {
+  width: 100px;
+  height: auto;
+}
+body main .container__tabla p {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  font-size: 26px;
+}
+body footer {
+  background-color: maroon;
+  height: 250px;
+  margin-top: 50px;
+}/*# sourceMappingURL=main.css.map */
