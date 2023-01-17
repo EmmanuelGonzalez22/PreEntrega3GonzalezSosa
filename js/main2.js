@@ -4,7 +4,6 @@ const tbody = document.querySelector("#table__body");
 const productos = document.querySelector(".gridProductos");
 const search = document.querySelector("#search");
 const botonComprar = document.querySelector("#botonComprar");
-const removeItem = document.querySelectorAll(".eliminarProducto");
 
 // si hay productos guardados en LS, el carrito toma ese array, sino queda vacio
 let carrito;
@@ -43,7 +42,6 @@ function crearHtml(arr, donde) {
     donde.innerHTML += html;
   }
 }
-crearHtml(listado, productos);
 
 // crea html del carrito
 function actualizaDOMcarrito(arr) {
@@ -57,12 +55,20 @@ function actualizaDOMcarrito(arr) {
               <td class="col-3">$${el.precio}</td>
               <td class="col-3">$${el.precio}</td>
               <td class="col-1">
-                <button class="btn btn-danger eliminarProducto">X</button>
+                <button class="btn btn-danger eliminarProducto" data-item="${el.id}">X</button>
               </td>
             </tr>`;
     tbody.innerHTML += html;
   }
   botonComprar.innerHTML = `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">COMPRAR</button>`;
+
+  // elimina producto del carrito
+  const removeItem = document.querySelectorAll(".eliminarProducto");
+  removeItem.forEach((el) => {
+    el.addEventListener("click", eliminarProducto);
+  });
+
+  // renderiza precio total
   calculaPrecioTotal(carrito);
 }
 
@@ -79,10 +85,17 @@ function agregarAlCarrito() {
     });
   });
 }
-agregarAlCarrito();
 
 // elimina producto del carrito
-function eliminarProducto(event) {}
+function eliminarProducto(event) {
+  const id = event.target.dataset.item;
+  carrito = carrito.filter((carritoId) => {
+    return carritoId.id != id;
+  });
+  actualizaDOMcarrito(carrito);
+  guardarLS(carrito);
+  calculaPrecioTotal(carrito);
+}
 // calcula precio total del carrito
 function calculaPrecioTotal(arr) {
   const totalCarrito = document.querySelector("#totalCarrito");
@@ -126,3 +139,7 @@ search.addEventListener("input", () => {
 
 // finaliza la compra
 botonComprar.addEventListener("click", comprar);
+
+// inicio
+crearHtml(listado, productos);
+agregarAlCarrito();
