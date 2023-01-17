@@ -1,4 +1,4 @@
-/* //--------------------------------------------------------------- VARIABLES */
+/* --------------------------------------------------------------- VARIABLES ---------------------------------------------------------------*/
 
 const tbody = document.querySelector("#table__body");
 const productos = document.querySelector(".gridProductos");
@@ -14,9 +14,10 @@ if (localStorage.getItem("carrito")) {
 } else {
   carrito = [];
 }
-/* //--------------------------------------------------------------- FUNCIONES */
 
-// crea el listado de productos
+/* --------------------------------------------------------------- FUNCIONES ---------------------------------------------------------------*/
+
+// crea HTML del listado de productos
 function crearHtml(arr, donde) {
   donde.innerHTML = "";
   let html = "";
@@ -43,7 +44,7 @@ function crearHtml(arr, donde) {
   }
 }
 
-// crea html del carrito
+// crea HTML del carrito
 function actualizaDOMcarrito(arr) {
   tbody.innerHTML = "";
   let html = "";
@@ -52,7 +53,7 @@ function actualizaDOMcarrito(arr) {
               <td class="col-2"><img
               src="./assets/img/${el.img}"></td>
               <td class="col-3">${el.nombre}</td>
-              <td class="col-3">$${el.precio}</td>
+              <td class="col-3"><input type="number" value="1" name="cantidad" id="cantidadProducto"/></td>
               <td class="col-3">$${el.precio}</td>
               <td class="col-1">
                 <button class="btn btn-danger eliminarProducto" data-item="${el.id}">X</button>
@@ -60,6 +61,8 @@ function actualizaDOMcarrito(arr) {
             </tr>`;
     tbody.innerHTML += html;
   }
+
+  // creo el boton de comprar
   botonComprar.innerHTML = `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">COMPRAR</button>`;
 
   // elimina producto del carrito
@@ -72,6 +75,26 @@ function actualizaDOMcarrito(arr) {
   calculaPrecioTotal(carrito);
 }
 
+/*--------------------------- EN PROCESO ---------------------------*/
+
+// estoy intentando hacer que no se duplique el producto en el carrito, sino que aumente la cantidad.
+
+/* function cantidad(arr) {
+  let cantidadProducto = parseInt(
+    document.querySelector("#cantidadProducto").value
+  );
+  for (const el of arr) {
+    if (carrito.find((producto) => producto == el.id)) {
+      cantidadProducto = carrito.reduce((total, itemId) => {
+        return (cantidadProducto = itemId == el ? (total += 1) : total);
+      }, 0);
+      console.log(cantidadProducto);
+    }
+  }
+}
+
+/*--------------------------- EN PROCESO ---------------------------*/
+
 // agrega un producto al carrito
 function agregarAlCarrito() {
   const botones = document.querySelectorAll(".button");
@@ -80,6 +103,7 @@ function agregarAlCarrito() {
       let seleccionado = el.getAttribute("id");
       let variante = listado.find((producto) => producto.id == seleccionado);
       carrito.push(variante);
+
       actualizaDOMcarrito(carrito);
       guardarLS(carrito);
     });
@@ -92,10 +116,12 @@ function eliminarProducto(event) {
   carrito = carrito.filter((carritoId) => {
     return carritoId.id != id;
   });
+
   actualizaDOMcarrito(carrito);
   guardarLS(carrito);
   calculaPrecioTotal(carrito);
 }
+
 // calcula precio total del carrito
 function calculaPrecioTotal(arr) {
   const totalCarrito = document.querySelector("#totalCarrito");
@@ -123,12 +149,14 @@ function filtrarNombre(arr, filtro) {
   return encontrado;
 }
 
-// guarda en LS
+// guarda array en LS, si el array esta vacio, elimina LS
 function guardarLS(arr) {
-  localStorage.setItem("carrito", JSON.stringify(arr));
+  arr.length == 0
+    ? localStorage.removeItem("carrito")
+    : localStorage.setItem("carrito", JSON.stringify(arr));
 }
 
-/* //--------------------------------------------------------------- LISTENERS */
+/* --------------------------------------------------------------- LISTENERS ---------------------------------------------------------------*/
 
 // busqueda por palabra
 search.addEventListener("input", () => {
@@ -143,3 +171,7 @@ botonComprar.addEventListener("click", comprar);
 // inicio
 crearHtml(listado, productos);
 agregarAlCarrito();
+
+/* COMENTARIOS */
+
+// aun me falta completar varias partes del script, pero creo que ya cumple con las rubricas de la tercera pre entrega.
