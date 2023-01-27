@@ -1,10 +1,10 @@
 /* ------------------------- PRODUCTOS ------------------------- */
 
 // construye productos
-function Producto(id, nombre, mascota, precio, stock, img, peso, edad) {
+function Producto(id, nombre, categoria, precio, stock, img, peso, edad) {
   this.id = id;
   this.nombre = nombre;
-  this.mascota = mascota;
+  this.categoria = categoria;
   this.precio = parseFloat(precio);
   this.stock = parseInt(stock);
   // valido si el producto tiene edad
@@ -30,7 +30,7 @@ function Producto(id, nombre, mascota, precio, stock, img, peso, edad) {
 const camita40 = new Producto(
   1,
   "camita 40x40cm",
-  "perro gato",
+  "camitas",
   2200,
   20,
   "camita40.jpg"
@@ -38,7 +38,7 @@ const camita40 = new Producto(
 const camita60 = new Producto(
   2,
   "camita 60x50cm",
-  "perro gato",
+  "camitas",
   3500,
   15,
   "camita50.jpg"
@@ -46,7 +46,7 @@ const camita60 = new Producto(
 const camita90 = new Producto(
   3,
   "camita 90x90cm",
-  "perro gato",
+  "camitas",
   4800,
   23,
   "camita90.jpg"
@@ -81,11 +81,11 @@ const eukanubaPerroAdu = new Producto(
   "15kg",
   "adulto"
 );
-const plato = new Producto(7, "plato", "perro gato", 1000, 22, "plato.jpg");
+const plato = new Producto(7, "plato", "accesorios", 1000, 22, "plato.jpg");
 const platoGrande = new Producto(
   8,
   "plato grande",
-  "perro gato",
+  "accesorios",
   2000,
   15,
   "platoGrande.jpg"

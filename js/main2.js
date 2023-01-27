@@ -6,13 +6,7 @@ const search = document.querySelector("#search");
 const botonComprar = document.querySelector("#botonComprar");
 
 // si hay productos guardados en LS, el carrito toma ese array, sino queda vacio
-let carrito;
-if (localStorage.getItem("carrito")) {
-  carrito = JSON.parse(localStorage.getItem("carrito"));
-  actualizaDOMcarrito();
-} else {
-  carrito = [];
-}
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 /* --------------------------------------------------------------- FUNCIONES ---------------------------------------------------------------*/
 
@@ -46,41 +40,49 @@ function crearHtml(arr, donde) {
 function actualizaDOMcarrito() {
   tbody.innerHTML = "";
   let html = "";
+
+  // quito duplicados del carrito
   let carritoSinDuplicados = [...new Set(carrito)];
 
+  // busca el producto que coincide con el id
   for (const el of carritoSinDuplicados) {
-    // destructuring
-    const { img, nombre, precio, id } = el;
+    const seleccionado = listado.find((producto) => {
+      return producto.id === parseInt(el);
+    });
 
     // si repite producto, aumenta contador
     const numeroUnidadesItem = carrito.reduce((total, producto) => {
-      return producto.id === id ? (total += 1) : total;
+      return producto === el ? (total += 1) : total;
     }, 0);
 
     html = `<tr class="row itemCarrito">
               <td class="col-2"><img
-              src="./assets/img/${img}"></td>
-              <td class="col-3">${nombre}</td>
+              src="./assets/img/${seleccionado.img}"></td>
+              <td class="col-3">${seleccionado.nombre}</td>
               <td class="col-3" id="cantidadProducto">${numeroUnidadesItem}</td>
-              <td class="col-3">$${precio}</td>
+              <td class="col-3">$${seleccionado.precio}</td>
               <td class="col-1">
-                <button class="btn btn-danger eliminarProducto" data-item="${id}">X</button>
+                <button class="btn btn-danger eliminarProducto" data-item="${seleccionado.id}">X</button>
               </td>
             </tr>`;
     tbody.innerHTML += html;
+
+    // creo el boton de comprar
+    botonComprar.innerHTML = `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">COMPRAR</button>`;
+
+    // elimina producto del carrito
+    const removeItem = document.querySelectorAll(".eliminarProducto");
+    removeItem.forEach((el) => {
+      el.addEventListener("click", eliminarProducto);
+    });
+
+    // renderiza precio total
+    calculaPrecioTotal(carrito);
   }
 
-  // creo el boton de comprar
-  botonComprar.innerHTML = `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">COMPRAR</button>`;
-
-  // elimina producto del carrito
-  const removeItem = document.querySelectorAll(".eliminarProducto");
-  removeItem.forEach((el) => {
-    el.addEventListener("click", eliminarProducto);
-  });
-
-  // renderiza precio total
-  calculaPrecioTotal(carrito);
+  // conteo de productos en el carrito
+  const contadorCarrito = document.querySelector("#contadorCarrito");
+  contadorCarrito.textContent = carrito.length;
 }
 
 // agrega un producto al carrito
@@ -89,9 +91,8 @@ function agregarAlCarrito() {
   botones.forEach((el) => {
     el.addEventListener("click", () => {
       let seleccionado = el.getAttribute("id");
-      let variante = listado.find((producto) => producto.id == seleccionado);
-      carrito.push(variante);
 
+      carrito.push(seleccionado);
       actualizaDOMcarrito();
       guardarLS(carrito);
     });
@@ -101,9 +102,15 @@ function agregarAlCarrito() {
 // elimina producto del carrito
 function eliminarProducto(event) {
   const id = event.target.dataset.item;
+  console.log(id);
   carrito = carrito.filter((carritoId) => {
-    return carritoId.id != id;
+    return carritoId != id;
   });
+
+  // si el carrito queda vacio, desaparece boton de comprar
+  if (carrito.length === 0) {
+    botonComprar.innerHTML = "";
+  }
 
   actualizaDOMcarrito();
   guardarLS(carrito);
@@ -113,10 +120,19 @@ function eliminarProducto(event) {
 // calcula precio total del carrito
 function calculaPrecioTotal(arr) {
   const totalCarrito = document.querySelector("#totalCarrito");
-  let total = arr.reduce((acc, el) => {
-    return acc + el.precio;
-  }, 0);
-  totalCarrito.innerHTML = `$${total}`;
+
+  let total = arr
+    .reduce((acc, el) => {
+      const seleccionado = listado.find((producto) => {
+        return producto.id === parseInt(el);
+      });
+      return acc + seleccionado.precio;
+    }, 0)
+    .toFixed(2);
+
+  carrito.length !== 0
+    ? (totalCarrito.innerHTML = `$${total}`)
+    : (totalCarrito.innerHTML = ``);
 }
 
 // finalizar la compra
@@ -129,14 +145,6 @@ function comprar() {
   botonComprar.innerHTML = "";
 }
 
-// filtra por nombre
-function filtrarNombre(arr, filtro) {
-  const encontrado = arr.filter((producto) => {
-    return producto.nombre.includes(filtro);
-  });
-  return encontrado;
-}
-
 // guarda array en LS, si el array esta vacio, elimina LS
 function guardarLS(arr) {
   arr.length == 0
@@ -146,16 +154,10 @@ function guardarLS(arr) {
 
 /* --------------------------------------------------------------- LISTENERS ---------------------------------------------------------------*/
 
-// busqueda por palabra
-search.addEventListener("input", () => {
-  let filtro = filtrarNombre(listado, search.value.toLowerCase());
-  crearHtml(filtro, productos);
-  agregarAlCarrito();
-});
-
 // finaliza la compra
 botonComprar.addEventListener("click", comprar);
 
 // inicio
 crearHtml(listado, productos);
 agregarAlCarrito();
+actualizaDOMcarrito();
