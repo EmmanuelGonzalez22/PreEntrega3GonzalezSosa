@@ -11,6 +11,11 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./sass/main.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
     <script
       src="https://kit.fontawesome.com/ce694f884b.js"
       crossorigin="anonymous"
@@ -44,7 +49,8 @@
     <main>
       <div class="container__principal">
         <aside>
-          <form action="">
+          <form action="" id="formCheckbox">
+            <h4 class="m-2 text-center">Categorías:</h4>
             <div>
               <label for="perro">Perros</label>
               <input type="checkbox" name="perro" value="perro" id="" />
@@ -87,8 +93,21 @@
         </table>
         <div>
           <p class="fw-bold">
-            TOTAL:<span id="totalCarrito"></span><span id="botonComprar"></span>
+            TOTAL:<span id="totalCarrito"></span
+            ><!-- <span id="botonComprar"></span> -->
           </p>
+        </div>
+        <div>
+          <form action="" id="botonComprar">
+            <!-- <label for="nombre">Ingrese su nombre: </label>
+            <input type="text" name="nombre" id="" required />
+            <label for="apellido">Ingrese su apellido: </label>
+            <input type="text" name="apellido" id="" required />
+            <label for="direccion">Ingrese su direccion: </label>
+            <input type="text" name="direccion" id="" required />
+            <input type="submit" value="comprar"
+            class="d-flex flex-column align-items-center justify-content-center" /> -->
+          </form>
         </div>
         <div
           class="modal fade"
@@ -128,12 +147,20 @@
       </section>
     </main>
     <footer></footer>
+    <!-- CDN BTS -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
-    <!--     <script src="./js/main.js"></script> -->
+    <!-- CDN TOASTIFY -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <!-- CDN SWEETALERT -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- MIS JS -->
     <script src="./js/datos.js"></script>
     <script src="./js/filtros.js"></script>
     <script src="./js/main2.js"></script>

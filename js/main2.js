@@ -46,7 +46,7 @@ function actualizaDOMcarrito() {
 
   // busca el producto que coincide con el id
   for (const el of carritoSinDuplicados) {
-    const seleccionado = listado.find((producto) => {
+    const seleccionado = listado.filter((producto) => {
       return producto.id === parseInt(el);
     });
 
@@ -57,18 +57,26 @@ function actualizaDOMcarrito() {
 
     html = `<tr class="row itemCarrito">
               <td class="col-2"><img
-              src="./assets/img/${seleccionado.img}"></td>
-              <td class="col-3">${seleccionado.nombre}</td>
+              src="./assets/img/${seleccionado[0].img}"></td>
+              <td class="col-3">${seleccionado[0].nombre}</td>
               <td class="col-3" id="cantidadProducto">${numeroUnidadesItem}</td>
-              <td class="col-3">$${seleccionado.precio}</td>
+              <td class="col-3">$${seleccionado[0].precio}</td>
               <td class="col-1">
-                <button class="btn btn-danger eliminarProducto" data-item="${seleccionado.id}">X</button>
+                <button class="btn btn-danger eliminarProducto" data-item="${seleccionado[0].id}">X</button>
               </td>
             </tr>`;
     tbody.innerHTML += html;
 
     // creo el boton de comprar
-    botonComprar.innerHTML = `<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">COMPRAR</button>`;
+    botonComprar.innerHTML = `
+    <label for="nombre">Ingrese su nombre: </label>
+    <input type="text" name="nombre" id="" required />
+    <label for="apellido">Ingrese su apellido: </label>
+    <input type="text" name="apellido" id="" required />
+    <label for="direccion">Ingrese su direccion: </label>
+    <input type="text" name="direccion" id="" required />
+    <input type="submit" value="Comprar" class="btn btn-primary"/>
+    `;
 
     // elimina producto del carrito
     const removeItem = document.querySelectorAll(".eliminarProducto");
@@ -92,6 +100,20 @@ function agregarAlCarrito() {
     el.addEventListener("click", () => {
       let seleccionado = el.getAttribute("id");
 
+      // mensaje toastify
+      Toastify({
+        text: "Producto añadido al carrito \n\nClick aquí para ir".toUpperCase(),
+        duration: 3000,
+        style: {
+          background: "background: rgb(45,122,5)",
+          background:
+            "linear-gradient(122deg, rgba(45,122,5,1) 0%, rgba(85,196,32,1) 100%)",
+        },
+        onClick: function () {
+          window.scroll(0, 999999);
+        },
+      }).showToast();
+
       carrito.push(seleccionado);
       actualizaDOMcarrito();
       guardarLS(carrito);
@@ -102,7 +124,6 @@ function agregarAlCarrito() {
 // elimina producto del carrito
 function eliminarProducto(event) {
   const id = event.target.dataset.item;
-  console.log(id);
   carrito = carrito.filter((carritoId) => {
     return carritoId != id;
   });
@@ -111,6 +132,17 @@ function eliminarProducto(event) {
   if (carrito.length === 0) {
     botonComprar.innerHTML = "";
   }
+
+  // mensaje toastify
+  Toastify({
+    text: "Producto eliminado \n del carrito".toUpperCase(),
+    duration: 3000,
+    style: {
+      background: "rgb(88,7,7)",
+      background:
+        "linear-gradient(137deg, rgba(88,7,7,1) 0%, rgba(214,42,42,1) 100%)",
+    },
+  }).showToast();
 
   actualizaDOMcarrito();
   guardarLS(carrito);
@@ -143,6 +175,33 @@ function comprar() {
   totalCarrito.innerHTML = "";
   tbody.innerHTML = "";
   botonComprar.innerHTML = "";
+
+  // mensaje de compra sweetalert
+  Swal.fire({
+    title:
+      "Muchas gracias por su compra! En 48hs estará recibiendo su pedido. \n\n GUAU GUAU!",
+    width: 600,
+    padding: "3em",
+    color: "white",
+    background: "black",
+    icon: "success",
+    html: "Me cerraré en <b></b>.",
+    timer: 3500,
+    timerProgressBar: true,
+    didOpen: () => {
+      Swal.showLoading();
+      const b = Swal.getHtmlContainer().querySelector("b");
+      timerInterval = setInterval(() => {
+        b.textContent = Swal.getTimerLeft();
+      }, 100);
+    },
+    willClose: () => {
+      clearInterval(timerInterval);
+    },
+  }).then((result) => {
+    if (result.dismiss === Swal.DismissReason.timer) {
+    }
+  });
 }
 
 // guarda array en LS, si el array esta vacio, elimina LS
@@ -155,7 +214,12 @@ function guardarLS(arr) {
 /* --------------------------------------------------------------- LISTENERS ---------------------------------------------------------------*/
 
 // finaliza la compra
-botonComprar.addEventListener("click", comprar);
+/* botonComprar.addEventListener("click", comprar); */
+
+botonComprar.addEventListener("submit", (e) => {
+  e.preventDefault();
+  comprar();
+});
 
 // inicio
 crearHtml(listado, productos);
