@@ -4,6 +4,8 @@ const tbody = document.querySelector("#table__body");
 const productos = document.querySelector(".gridProductos");
 const search = document.querySelector("#search");
 const botonComprar = document.querySelector("#botonComprar");
+const categorias = ["perro", "gato", "camitas", "accesorios"];
+const formCheckbox = document.querySelector("#formCheckbox");
 
 // si hay productos guardados en LS, el carrito toma ese array, sino queda vacio
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -34,6 +36,7 @@ function crearHtml(arr, donde) {
             </div>`;
     donde.innerHTML += html;
   }
+  agregarAlCarrito();
 }
 
 // crea HTML del carrito
@@ -70,13 +73,19 @@ function actualizaDOMcarrito() {
     // creo el boton de comprar
     botonComprar.innerHTML = `
     <label for="nombre">Ingrese su nombre: </label>
-    <input type="text" name="nombre" id="" required />
+    <input type="text" name="nombre" placeholder="Firulais" id="" required />
     <label for="apellido">Ingrese su apellido: </label>
-    <input type="text" name="apellido" id="" required />
+    <input type="text" name="apellido" placeholder="Bola de nieve" id="" required />
+    <label for="telefono">Ingrese su telefono: </label>
+    <input type="text" name="telefono" placeholder="123456789" id="inputTelefono" required />
     <label for="direccion">Ingrese su direccion: </label>
-    <input type="text" name="direccion" id="" required />
+    <input type="text" name="direccion" placeholder="Avenida Siempreviva 742" id="" required />
     <input type="submit" value="Comprar" class="btn btn-primary"/>
     `;
+
+    // valido que solo se ingresen numeros en telefono
+    const inputTelefono = document.querySelector("#inputTelefono");
+    inputTelefono.addEventListener("keypress", validar);
 
     // elimina producto del carrito
     const removeItem = document.querySelectorAll(".eliminarProducto");
@@ -88,7 +97,7 @@ function actualizaDOMcarrito() {
     calculaPrecioTotal(carrito);
   }
 
-  // conteo de productos en el carrito
+  // conteo de productos en el icono del carrito
   const contadorCarrito = document.querySelector("#contadorCarrito");
   contadorCarrito.textContent = carrito.length;
 }
@@ -103,7 +112,9 @@ function agregarAlCarrito() {
       // mensaje toastify
       Toastify({
         text: "Producto añadido al carrito \n\nClick aquí para ir".toUpperCase(),
-        duration: 3000,
+        duration: 2000,
+        gravity: "bottom",
+        position: "left",
         style: {
           background: "background: rgb(45,122,5)",
           background:
@@ -136,7 +147,8 @@ function eliminarProducto(event) {
   // mensaje toastify
   Toastify({
     text: "Producto eliminado \n del carrito".toUpperCase(),
-    duration: 3000,
+    duration: 2000,
+    position: "left",
     style: {
       background: "rgb(88,7,7)",
       background:
@@ -183,17 +195,16 @@ function comprar() {
     width: 600,
     padding: "3em",
     color: "white",
-    background: "black",
+    background: "rgb(0,0,0)",
+    background:
+      "radial-gradient(circle, rgba(0,0,0,1) 45%, rgba(241,196,15,1) 100%)",
     icon: "success",
-    html: "Me cerraré en <b></b>.",
+    html: "",
     timer: 3500,
     timerProgressBar: true,
     didOpen: () => {
       Swal.showLoading();
-      const b = Swal.getHtmlContainer().querySelector("b");
-      timerInterval = setInterval(() => {
-        b.textContent = Swal.getTimerLeft();
-      }, 100);
+      timerInterval = setInterval(() => {}, 100);
     },
     willClose: () => {
       clearInterval(timerInterval);
@@ -211,17 +222,65 @@ function guardarLS(arr) {
     : localStorage.setItem("carrito", JSON.stringify(arr));
 }
 
+// valida que solo se ingresen numeros
+function validar(evento) {
+  const codNumber = evento.which;
+  if (codNumber >= 48 && codNumber <= 57) {
+    return true;
+  } else {
+    evento.preventDefault();
+    return false;
+  }
+}
+
 /* --------------------------------------------------------------- LISTENERS ---------------------------------------------------------------*/
 
 // finaliza la compra
-/* botonComprar.addEventListener("click", comprar); */
-
 botonComprar.addEventListener("submit", (e) => {
   e.preventDefault();
   comprar();
 });
 
 // inicio
-crearHtml(listado, productos);
-agregarAlCarrito();
+fetch(`./data/data.json`)
+  .then((response) => response.json())
+  .then((data) => {
+    crearHtml(data, productos);
+
+    // ------------------- filtro por palabra
+    search.addEventListener("input", () => {
+      let filtro = filtrarNombre(data, search.value.toLowerCase());
+      crearHtml(filtro, productos);
+    });
+
+    // ------------------- filtro por checkbox
+    formCheckbox.addEventListener("change", () => {
+      let arrFiltrado = [];
+
+      // itero los checkbox tildados y devuelvo al array las categorias que coinciden
+      categorias.forEach((categoria) => {
+        if (formCheckbox[categoria].checked) {
+          const filtro = filtrarCategoria(data, categoria);
+          arrFiltrado = arrFiltrado.concat(filtro);
+        }
+      });
+
+      // busqueda por palabra dentro de los checkbox tildados
+      search.addEventListener("input", () => {
+        arrFiltrado.length !== 0
+          ? (arrFiltrado = arrFiltrado)
+          : (arrFiltrado = data);
+        const filtro = filtrarNombre(arrFiltrado, search.value.toLowerCase());
+        crearHtml(filtro, productos);
+      });
+
+      arrFiltrado.length !== 0
+        ? crearHtml(arrFiltrado, productos)
+        : crearHtml(data, productos);
+    });
+  })
+  .catch((error) => {
+    console.log("Hubo un error de " + error);
+  });
+
 actualizaDOMcarrito();

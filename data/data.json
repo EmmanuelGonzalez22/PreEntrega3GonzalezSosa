@@ -1,0 +1,112 @@
+[
+    {
+       "id":1,
+       "nombre":"camita 40x40cm",
+       "categoria":"camitas",
+       "precio":2200,
+       "stock":20,
+       "img":"camita40.jpg",
+       "peso":"-",
+       "edad":"-"
+    },
+    {
+       "id":2,
+       "nombre":"camita 60x50cm",
+       "categoria":"camitas",
+       "precio":3500,
+       "stock":15,
+       "img":"camita50.jpg",
+       "peso":"-",
+       "edad":"-"
+    },
+    {
+       "id":3,
+       "nombre":"camita 90x90cm",
+       "categoria":"camitas",
+       "precio":4800,
+       "stock":23,
+       "img":"camita90.jpg",
+       "peso":"-",
+       "edad":"-"
+    },
+    {
+       "id":4,
+       "nombre":"dog selection perro adulto x 21kg",
+       "categoria":"perro",
+       "precio":4400,
+       "stock":21,
+       "img":"DogSelectionPerroAdu.jpg",
+       "peso":"21kg",
+       "edad":"adulto"
+    },
+    {
+       "id":5,
+       "nombre":"dog selection perro cachorro x 21kg",
+       "categoria":"perro",
+       "precio":6200,
+       "stock":18,
+       "img":"DogSelectionPerroCach.jpg",
+       "peso":"21kg",
+       "edad":"cachorro"
+    },
+    {
+       "id":6,
+       "nombre":"eukanuba perro adulto x 15kg",
+       "categoria":"perro",
+       "precio":6500,
+       "stock":26,
+       "img":"EukanubaPerroAdu.jpeg",
+       "peso":"15kg",
+       "edad":"adulto"
+    },
+    {
+       "id":7,
+       "nombre":"plato",
+       "categoria":"accesorios",
+       "precio":1000,
+       "stock":22,
+       "img":"plato.jpg",
+       "peso":"-",
+       "edad":"-"
+    },
+    {
+       "id":8,
+       "nombre":"plato grande",
+       "categoria":"accesorios",
+       "precio":2000,
+       "stock":15,
+       "img":"platoGrande.jpg",
+       "peso":"-",
+       "edad":"-"
+    },
+    {
+       "id":9,
+       "nombre":"premium gato adulto x 15kg",
+       "categoria":"gato",
+       "precio":6500,
+       "stock":24,
+       "img":"PremiumGatoAdu.jpg",
+       "peso":"15kg",
+       "edad":"adulto"
+    },
+    {
+       "id":10,
+       "nombre":"premium perro adulto x 20kg",
+       "categoria":"perro",
+       "precio":6500,
+       "stock":20,
+       "img":"PremiumPerroAdu.jpg",
+       "peso":"20kg",
+       "edad":"adulto"
+    },
+    {
+       "id":11,
+       "nombre":"vital can gato cachorro x 15kg",
+       "categoria":"gato",
+       "precio":4500,
+       "stock":18,
+       "img":"VitalCanGatoCach.png",
+       "peso":"20kg",
+       "edad":"cachorro"
+    }
+ ]

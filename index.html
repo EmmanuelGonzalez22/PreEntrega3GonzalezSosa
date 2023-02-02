@@ -35,45 +35,42 @@
           ></span>
         </div>
       </nav>
-      <div>
+      <div class="tittle__container">
         <h2>Productos</h2>
-        <label for="buscar"></label>
-        <input
-          type="text"
-          name="buscar"
-          placeholder="Buscar producto"
-          id="search"
-        />
+        <div>
+          <label for="buscar"></label>
+          <input
+            type="text"
+            name="buscar"
+            placeholder="Buscar producto"
+            id="search"
+          />
+        </div>
       </div>
     </header>
     <main>
+      <aside>
+        <form action="" id="formCheckbox">
+          <h4 class="m-2 text-center">Categorías:</h4>
+          <div>
+            <label for="perro">Perros</label>
+            <input type="checkbox" name="perro" value="perro" id="" />
+          </div>
+          <div>
+            <label for="gato">Gatos</label>
+            <input type="checkbox" name="gato" value="gato" id="" />
+          </div>
+          <div>
+            <label for="camitas">Camitas</label>
+            <input type="checkbox" name="camitas" value="camitas" id="" />
+          </div>
+          <div>
+            <label for="accesorios">Accesorios</label>
+            <input type="checkbox" name="accesorios" value="accesorios" id="" />
+          </div>
+        </form>
+      </aside>
       <div class="container__principal">
-        <aside>
-          <form action="" id="formCheckbox">
-            <h4 class="m-2 text-center">Categorías:</h4>
-            <div>
-              <label for="perro">Perros</label>
-              <input type="checkbox" name="perro" value="perro" id="" />
-            </div>
-            <div>
-              <label for="gato">Gatos</label>
-              <input type="checkbox" name="gato" value="gato" id="" />
-            </div>
-            <div>
-              <label for="camitas">Camitas</label>
-              <input type="checkbox" name="camitas" value="camitas" id="" />
-            </div>
-            <div>
-              <label for="accesorios">Accesorios</label>
-              <input
-                type="checkbox"
-                name="accesorios"
-                value="accesorios"
-                id=""
-              />
-            </div>
-          </form>
-        </aside>
         <section class="gridProductos"><!-- productos --></section>
       </div>
       <section class="container__tabla">
@@ -99,14 +96,7 @@
         </div>
         <div>
           <form action="" id="botonComprar">
-            <!-- <label for="nombre">Ingrese su nombre: </label>
-            <input type="text" name="nombre" id="" required />
-            <label for="apellido">Ingrese su apellido: </label>
-            <input type="text" name="apellido" id="" required />
-            <label for="direccion">Ingrese su direccion: </label>
-            <input type="text" name="direccion" id="" required />
-            <input type="submit" value="comprar"
-            class="d-flex flex-column align-items-center justify-content-center" /> -->
+            <!-- contenido dinamico -->
           </form>
         </div>
         <div
@@ -146,7 +136,7 @@
         </div>
       </section>
     </main>
-    <footer></footer>
+    <footer><h5>PET´S ONLINE</h5></footer>
     <!-- CDN BTS -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

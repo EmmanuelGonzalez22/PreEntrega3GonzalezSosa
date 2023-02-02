@@ -45,7 +45,7 @@ body header nav div span i #contadorCarrito {
   top: 0;
   margin-left: 3px;
 }
-body header h2 {
+body header .tittle__container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,27 +53,49 @@ body header h2 {
   background: rgb(202, 199, 199);
   margin: 0;
 }
-body main .container__principal {
-  display: flex;
+body header .tittle__container div {
+  position: absolute;
+  right: 50px;
 }
-body main .container__principal aside {
+body header .tittle__container div input {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  text-align: center;
+  width: 200px;
+}
+body main {
+  display: grid;
+  grid-template-columns: 0.4fr auto;
+  grid-template-areas: "aside productos productos" "aside carrito carrito";
+  background-color: snow;
+  background-image: url(../assets/img/huesitos.png);
+  background-repeat: repeat;
+  background-size: 200px;
+}
+body main aside {
+  grid-area: aside;
   position: -webkit-sticky;
   position: sticky;
   z-index: 1;
   top: 230px;
-  width: 10%;
-  background-color: rgba(241, 196, 15, 0.5764705882);
+  background: #f1c40f;
 }
-body main .container__principal aside form {
+body main aside form {
   display: flex;
   flex-direction: column;
   margin-top: 30px;
 }
-body main .container__principal aside form div {
+body main aside form div {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 15%;
+}
+body main .container__principal {
+  grid-area: productos;
+  display: flex;
+  justify-content: center;
 }
 body main .container__principal section.gridProductos {
   width: 90%;
@@ -86,6 +108,7 @@ body main .container__principal section.gridProductos {
 }
 body main .container__principal section.gridProductos .tarjeta {
   width: 18rem;
+  background-color: rgba(128, 128, 128, 0.8392156863);
 }
 body main .container__principal section.gridProductos .tarjeta .container_img {
   width: 90%;
@@ -108,6 +131,7 @@ body main .container__principal section.gridProductos .tarjeta p {
   font-weight: bold;
 }
 body main .container__tabla {
+  grid-area: carrito;
   width: 90%;
   margin-top: 50px;
   margin-left: auto;
@@ -145,7 +169,13 @@ body main .container__tabla #botonComprar input:last-child {
   margin: 30px 0 0 auto;
 }
 body footer {
-  background-color: #f1c40f;
-  height: 50px;
-  margin-top: 50px;
+  background-color: rgb(202, 199, 199);
+  height: 100px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body footer h5 {
+  margin: 0;
 }/*# sourceMappingURL=main.css.map */

@@ -1,9 +1,3 @@
-/*-------------------------- VARIABLES --------------------------*/
-
-const categorias = ["perro", "gato", "camitas", "accesorios"];
-const formCheckbox = document.querySelector("#formCheckbox");
-const checkBox = document.querySelectorAll(`input[type="checkbox"]`);
-
 /*-------------------------- FUNCIONES --------------------------*/
 
 // filtra por categoria
@@ -25,14 +19,14 @@ function filtrarNombre(arr, filtro) {
 /*-------------------------- LISTENERS --------------------------*/
 
 // busqueda por palabra
-search.addEventListener("input", () => {
+/* search.addEventListener("input", () => {
   let filtro = filtrarNombre(listado, search.value.toLowerCase());
   crearHtml(filtro, productos);
   agregarAlCarrito();
-});
+}); */
 
 // busqueda por checkbox
-formCheckbox.addEventListener("change", () => {
+/* formCheckbox.addEventListener("change", () => {
   let arrFiltrado = [];
 
   // itero los checkbox tildados y devuelvo al array las categorias que coinciden
@@ -58,4 +52,4 @@ formCheckbox.addEventListener("change", () => {
     : crearHtml(listado, productos);
 
   agregarAlCarrito();
-});
+}); */
