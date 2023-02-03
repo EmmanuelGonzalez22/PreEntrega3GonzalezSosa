@@ -74,12 +74,13 @@ body {
   }
   main {
     display: grid;
-    grid-template-columns: 0.4fr auto;
+    grid-template-columns: 220px auto;
     grid-template-areas: "aside productos productos" "aside carrito carrito";
     background-color: snow;
     background-image: url(../assets/img/huesitos.png);
     background-repeat: repeat;
     background-size: 200px;
+    min-height: 100vh;
 
     aside {
       grid-area: aside;
@@ -105,6 +106,15 @@ body {
       grid-area: productos;
       display: flex;
       justify-content: center;
+
+      h3 {
+        position: absolute;
+        top: 44%;
+        left: 35%;
+        font-weight: bold;
+        font-size: 40px;
+        text-shadow: 0px 0px 6px #cb9511;
+      }
 
       section.gridProductos {
         width: 90%;

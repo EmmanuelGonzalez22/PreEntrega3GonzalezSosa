@@ -120,7 +120,7 @@ const vitalCanGatoCach = new Producto(
   "20kg",
   "cachorro"
 );
-const listado = [
+/* const listado = [
   camita40,
   camita60,
   camita90,
@@ -132,4 +132,4 @@ const listado = [
   premiumGatoAdu,
   premiumPerroAdu,
   vitalCanGatoCach,
-];
+]; */

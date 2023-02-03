@@ -10,9 +10,14 @@ function filtrarCategoria(arr, filtro) {
 
 // filtra por nombre
 function filtrarNombre(arr, filtro) {
+  const sinProductos = document.getElementById("sinProductos");
+
   const encontrado = arr.filter((producto) => {
     return producto.nombre.includes(filtro);
   });
+  encontrado.length == 0
+    ? sinProductos.classList.remove("d-none")
+    : sinProductos.classList.add("d-none");
   return encontrado;
 }
 
