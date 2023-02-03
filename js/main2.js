@@ -76,9 +76,9 @@ function actualizaDOMcarrito() {
     <input type="text" name="nombre" placeholder="Firulais" id="" required />
     <label for="apellido">Ingrese su apellido: </label>
     <input type="text" name="apellido" placeholder="Bola de nieve" id="" required />
-    <label for="telefono">Ingrese su telefono: </label>
+    <label for="telefono">Ingrese su teléfono: </label>
     <input type="text" name="telefono" placeholder="123456789" id="inputTelefono" required />
-    <label for="direccion">Ingrese su direccion: </label>
+    <label for="direccion">Ingrese su dirección: </label>
     <input type="text" name="direccion" placeholder="Avenida Siempreviva 742" id="" required />
     <input type="submit" value="Comprar" class="btn btn-primary"/>
     `;
@@ -241,12 +241,15 @@ botonComprar.addEventListener("submit", (e) => {
   comprar();
 });
 
-// inicio
+/* --------------------------------------------------------------- INICIO ---------------------------------------------------------------*/
+
+// cargo datos de un .json local
 fetch(`./data/data.json`)
   .then((response) => response.json())
   .then((data) => {
     crearHtml(data, productos);
 
+    // LISTENERS PARA FILTRAR USANDO LOS DATOS TRAIDOS DEL .JSON
     // ------------------- filtro por palabra
     search.addEventListener("input", () => {
       let filtro = filtrarNombre(data, search.value.toLowerCase());
@@ -279,8 +282,13 @@ fetch(`./data/data.json`)
         : crearHtml(data, productos);
     });
   })
+
+  // MANEJO EN CASO DE ERROR
   .catch((error) => {
-    console.log("Hubo un error de " + error);
+    console.log(error);
+    location.href(`https://http.cat/404`);
   });
 
 actualizaDOMcarrito();
+
+/* -------------------------------------------------------------------------------------------------- */
