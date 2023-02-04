@@ -70,7 +70,7 @@ function actualizaDOMcarrito(json) {
             </tr>`;
     tbody.innerHTML += html;
 
-    // creo el boton de comprar
+    // creo el boton de comprar y formulario de compra
     botonComprar.innerHTML = `
     <label for="nombre">Ingrese su nombre: </label>
     <input type="text" name="nombre" placeholder="Firulais" id="" required />
@@ -286,13 +286,7 @@ fetch(`./data/data.json`)
     });
   });
 
-// catch
-/* .catch((error) => {
-    location.href = `http://http.cat/404`;
-  }); */
-
 /* ---------------------------------------------- COMENTARIOS ---------------------------------------------------- */
 
-/* El flujo funciona todo con los datos traidos del .json local. Me costo mucho trabajo poder rearmar el codigo 
-para utilizar los datos traidos del fetch. No pude arreglar el bug que se me genera a la hora de agregar un producto 
-al carrito (habiendo ya otro producto agregado), mientras utilizo un filtro*/
+/* El flujo funciona todo con los datos traidos del .json local. No pude arreglar el bug que se me genera a la hora de agregar un producto al carrito (habiendo ya otro producto agregado), mientras utilizo un filtro. Planeo seguir 
+optimizandolo y rearmandolo para poder realizar todo el flujo sobre los datos traidos del .json local. */

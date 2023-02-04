@@ -71,7 +71,7 @@ function actualizaDOMcarrito() {
             </tr>`;
     tbody.innerHTML += html;
 
-    // creo el boton de comprar
+    // creo el boton de comprar y formulario de compra
     botonComprar.innerHTML = `
     <label for="nombre">Ingrese su nombre: </label>
     <input type="text" name="nombre" placeholder="Firulais" id="" required />
@@ -287,13 +287,9 @@ fetch(`./data/data.json`)
     });
   });
 
-// MANEJO EN CASO DE ERROR
-/* .catch((error) => {
-    location.href = `http://http.cat/404`;
-  }); */
-
 actualizaDOMcarrito();
 
 /* ---------------------------------------------- COMENTARIOS ---------------------------------------------------- */
-/* La app funciona perfecto. Estoy utilizando los datos del .json local para pintar las cards, y realizar los filtros.
-El flujo restante utiliza los datos del array listado. */
+/* Estoy utilizando los datos del .json local para pintar las cards, y realizar los filtros.
+El flujo restante utiliza los datos del array listado. Planeo seguir optimizandolo y rearmandolo para poder realizar 
+todo el flujo sobre los datos traidos del .json local. */
