@@ -284,12 +284,12 @@ fetch(`./data/data.json`)
       e.preventDefault();
       comprar(data);
     });
-  })
-
-  // catch
-  .catch((error) => {
-    location.href = `http://http.cat/404`;
   });
+
+// catch
+/* .catch((error) => {
+    location.href = `http://http.cat/404`;
+  }); */
 
 /* ---------------------------------------------- COMENTARIOS ---------------------------------------------------- */
 
