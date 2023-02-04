@@ -37,7 +37,6 @@ function crearHtml(arr, donde) {
             </div>`;
     donde.innerHTML += html;
   }
-  console.log(arr);
   agregarAlCarrito(arr);
 }
 
@@ -129,7 +128,6 @@ function agregarAlCarrito(json) {
       }).showToast();
 
       carrito.push(seleccionado);
-      console.log(json);
       actualizaDOMcarrito(json);
       guardarLS(carrito);
     });
@@ -290,7 +288,7 @@ fetch(`./data/data.json`)
 
   // catch
   .catch((error) => {
-    error = location.href(`https://http.cat/404`);
+    location.href = `http://http.cat/404`;
   });
 
 /* ---------------------------------------------- COMENTARIOS ---------------------------------------------------- */

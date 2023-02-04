@@ -285,12 +285,12 @@ fetch(`./data/data.json`)
         ? crearHtml(arrFiltrado, productos)
         : crearHtml(data, productos);
     });
-  })
-
-  // MANEJO EN CASO DE ERROR
-  .catch((error) => {
-    error = location.href(`https://http.cat/404`);
   });
+
+// MANEJO EN CASO DE ERROR
+/* .catch((error) => {
+    location.href = `http://http.cat/404`;
+  }); */
 
 actualizaDOMcarrito();
 
