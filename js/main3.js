@@ -6,6 +6,7 @@ const search = document.querySelector("#search");
 const botonComprar = document.querySelector("#botonComprar");
 const categorias = ["perro", "gato", "camitas", "accesorios"];
 const formCheckbox = document.querySelector("#formCheckbox");
+const sinProductos = document.getElementById("sinProductos");
 
 // si hay productos guardados en LS, el carrito toma ese array, sino queda vacio
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -258,6 +259,9 @@ fetch(`./data/data.json`)
         if (formCheckbox[categoria].checked) {
           const filtro = filtrarCategoria(data, categoria);
           arrFiltrado = arrFiltrado.concat(filtro);
+        } else {
+          sinProductos.classList.add("d-none");
+          search.value = "";
         }
       });
 
@@ -284,8 +288,11 @@ fetch(`./data/data.json`)
 
   // catch
   .catch((error) => {
-    console.log("Hubo un error de " + error);
-    location.href(`https://http.cat/404`);
+    error = location.href(`https://http.cat/404`);
   });
 
-/* -------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------- COMENTARIOS ---------------------------------------------------- */
+
+/* El flujo funciona todo con los datos traidos del .json local. Me costo mucho trabajo poder rearmar el codigo 
+para utilizar los datos traidos del fetch. No pude arreglar el bug que se me genera a la hora de agregar un producto 
+al carrito (habiendo ya otro producto agregado), mientras utilizo un filtro*/

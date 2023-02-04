@@ -104,20 +104,16 @@ body {
     }
     .container__principal {
       grid-area: productos;
-      display: flex;
-      justify-content: center;
 
       h3 {
-        position: absolute;
-        top: 44%;
-        left: 35%;
+        text-align: center;
+        margin: 200px auto 120px;
         font-weight: bold;
         font-size: 40px;
         text-shadow: 0px 0px 6px #cb9511;
       }
 
       section.gridProductos {
-        width: 90%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         justify-items: center;

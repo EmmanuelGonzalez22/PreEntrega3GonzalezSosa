@@ -10,8 +10,6 @@ function filtrarCategoria(arr, filtro) {
 
 // filtra por nombre
 function filtrarNombre(arr, filtro) {
-  const sinProductos = document.getElementById("sinProductos");
-
   const encontrado = arr.filter((producto) => {
     return producto.nombre.includes(filtro);
   });

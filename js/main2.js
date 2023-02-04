@@ -6,6 +6,7 @@ const search = document.querySelector("#search");
 const botonComprar = document.querySelector("#botonComprar");
 const categorias = ["perro", "gato", "camitas", "accesorios"];
 const formCheckbox = document.querySelector("#formCheckbox");
+const sinProductos = document.querySelector("#sinProductos");
 
 // si hay productos guardados en LS, el carrito toma ese array, sino queda vacio
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -265,6 +266,9 @@ fetch(`./data/data.json`)
         if (formCheckbox[categoria].checked) {
           const filtro = filtrarCategoria(data, categoria);
           arrFiltrado = arrFiltrado.concat(filtro);
+        } else {
+          sinProductos.classList.add("d-none");
+          search.value = "";
         }
       });
 
@@ -285,10 +289,11 @@ fetch(`./data/data.json`)
 
   // MANEJO EN CASO DE ERROR
   .catch((error) => {
-    console.log(error);
-    location.href(`https://http.cat/404`);
+    error = location.href(`https://http.cat/404`);
   });
 
 actualizaDOMcarrito();
 
-/* -------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------- COMENTARIOS ---------------------------------------------------- */
+/* La app funciona perfecto. Estoy utilizando los datos del .json local para pintar las cards, y realizar los filtros.
+El flujo restante utiliza los datos del array listado. */
