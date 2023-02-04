@@ -37,6 +37,7 @@ function crearHtml(arr, donde) {
             </div>`;
     donde.innerHTML += html;
   }
+  console.log(arr);
   agregarAlCarrito(arr);
 }
 
@@ -128,6 +129,7 @@ function agregarAlCarrito(json) {
       }).showToast();
 
       carrito.push(seleccionado);
+      console.log(json);
       actualizaDOMcarrito(json);
       guardarLS(carrito);
     });
